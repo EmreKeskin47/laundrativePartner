@@ -1,0 +1,7 @@
+{
+  "name": "laundrativePartner",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

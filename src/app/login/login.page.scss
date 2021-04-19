@@ -1,0 +1,94 @@
+.root {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+.full-width {
+  width: 100%;
+}
+.title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #5e5e5e;
+}
+.list {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-radius: 10px;
+}
+.input-container {
+  padding: 0.5rem;
+}
+
+.icon {
+  font-size: 2rem;
+  padding-right: 1rem;
+  padding-top: 0.6rem;
+}
+.icon-color {
+  color: #5e5e5e;
+}
+
+.text-1rem {
+  font-size: 0.8rem;
+  color: black;
+}
+
+.first-button-container {
+  display: flex;
+  justify-content: space-between;
+  color: black;
+}
+
+.remember-me {
+  text-align: center;
+  padding-left: 1rem;
+  font-size: 0.7rem;
+}
+
+.card-icon {
+  position: absolute;
+  top: 1.5rem;
+  font-size: 2rem;
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.sign-btn {
+  width: 9rem;
+  border-radius: 10px;
+  box-shadow: 1px 2px #888888;
+}
+
+.button-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.btn-color {
+  color: #e75761;
+}
+
+.toLowerCase {
+  text-transform: lowercase;
+}
+
+.error-message {
+  color: #4e4949;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.gray {
+  color: #5e5e5e;
+}
+
+.bottom-text {
+  font-size: 0.7rem;
+}

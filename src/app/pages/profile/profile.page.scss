@@ -10,7 +10,6 @@
   justify-content: space-between;
   display: flex;
   flex: 1;
-  padding: 1rem 0 1rem 1rem;
 }
 
 .label {
@@ -35,10 +34,26 @@
 }
 
 .field-value {
+  font-size: 0.8rem;
 }
 
 .info-text {
   padding-left: 1rem;
   padding-top: 0.5rem;
   font-size: 0.8rem;
+}
+
+.input {
+  --background: whitesmoke;
+  width: 100%;
+  flex: 1;
+  border-radius: 10px;
+}
+
+.error-message {
+  color: #4e4949;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-left: 10px;
+  margin-top: 10px;
 }

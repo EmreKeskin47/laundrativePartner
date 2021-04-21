@@ -72,6 +72,5 @@ export class LoginPage implements OnInit {
         message: 'parolanız en az 6 karakter uzunluğunda olmalı ',
       },
     ],
-    matching_passwords: [{ type: 'areEqual', message: 'parola uyuşma hatası' }],
   };
 }

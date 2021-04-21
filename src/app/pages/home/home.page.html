@@ -8,4 +8,79 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="medium"> </ion-content>
+<ion-content color="medium">
+  <ion-item color="medium" lines="none" class="store-container">
+    <ion-icon class="gray store-icon" name="nuclear-outline"></ion-icon>
+    <div style="padding-top: 1.5rem">
+      <ion-label class="gray store-name"
+        >{{institutionInfo.kurum_adi}}</ion-label
+      >
+      <ion-label class="gray store-manager"
+        >{{institutionInfo.yonetici_adi}}</ion-label
+      >
+    </div>
+  </ion-item>
+
+  <ion-grid style="padding-top: 2rem">
+    <ion-row>
+      <ion-col>
+        <ion-item
+          button
+          color="primary"
+          lines="none"
+          detail="false"
+          class="grid-border-radius"
+          (click)="navigateToNewOrder()"
+        >
+          <div style="flex: 1">
+            <ion-label class="number">
+              {{institutionInfo.yeniSiparis}}
+            </ion-label>
+            <ion-label class="option"> yeni siparis</ion-label>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item
+          button
+          color="primary"
+          lines="none"
+          detail="false"
+          class="grid-border-radius"
+          (click)="navigateToQueue()"
+        >
+          <div style="flex: 1">
+            <ion-label class="number">
+              {{institutionInfo.islemSirasi}}
+            </ion-label>
+            <ion-label class="option"> işlem sırası</ion-label>
+          </div>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item
+          button
+          color="primary"
+          lines="none"
+          detail="false"
+          class="grid-border-radius"
+          (click)="navigateToOrderList()"
+        >
+          <div style="flex: 1">
+            <ion-label class="number">
+              {{institutionInfo.siparisListesi}}
+            </ion-label>
+            <ion-label class="option"> siparis listesi</ion-label>
+          </div>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="bottom-label">
+    <ion-label class="gray"
+      >tüm özelliklere erişmek için <b> laundrative web </b> sürümünü
+      kullanabilirsiniz</ion-label
+    >
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 .header-toolbar {
-  padding: 0.5rem 0 0rem 0;
+  padding: 0rem 0 0rem 0;
 }
 .header-title {
   text-align: left;
@@ -10,4 +10,54 @@
 .header-subtitle {
   padding-top: 1rem;
   padding-left: 5rem;
+}
+
+.gray {
+  color: #5e5e5e;
+}
+
+.store-container {
+  padding-top: 2rem;
+  --padding-start: 0rem;
+}
+
+.store-icon {
+  font-size: 5rem;
+  margin: 0;
+  padding: 0;
+}
+.store-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.store-manager {
+  font-size: 0.8rem;
+}
+
+.grid-border-radius {
+  border-radius: 10px;
+  --inner-padding-end: 0;
+  --padding-start: 0;
+}
+
+.number {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1.5rem 0 1.5rem 0;
+  font-weight: bold;
+}
+
+.option {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding-bottom: 0.5rem;
+}
+
+.bottom-label {
+  padding-top: 2rem;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  text-align: left;
 }

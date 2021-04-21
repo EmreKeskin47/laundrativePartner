@@ -1,0 +1,44 @@
+.expendable-item {
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  --border-radius: 10px;
+  --padding-start: 0;
+}
+
+.card-title-container {
+  justify-content: space-between;
+  display: flex;
+  flex: 1;
+  padding: 1rem 0 1rem 1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  padding-top: 0.2rem;
+}
+
+.text-color {
+  color: #5e5e5e;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.title-color {
+  color: #ff2f92;
+}
+
+.field-name {
+  color: #929292;
+}
+
+.field-value {
+}
+
+.info-text {
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+}

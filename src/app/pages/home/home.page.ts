@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Kurum } from './../../models/kurum';
 import { Component, OnInit } from '@angular/core';
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit {
   institutionInfo: Kurum;
 
-  navigateToProfile() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.institutionInfo = new Kurum(
@@ -20,6 +21,9 @@ export class HomePage implements OnInit {
     );
   }
 
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
   navigateToNewOrder() {}
   navigateToQueue() {}
   navigateToOrderList() {}

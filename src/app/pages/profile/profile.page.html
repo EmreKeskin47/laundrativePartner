@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>profil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="medium">
+  <!--İŞLETME BİLGİLERİ -->
+  <ion-item
+    button
+    detail="false"
+    lines="none"
+    (click)="showInfo()"
+    class="expendable-item"
+  >
+    <div style="width: 100%">
+      <div class="card-title-container">
+        <ion-label class="label title-color bold-text"
+          >işletme bilgileri</ion-label
+        >
+        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+      </div>
+      <div *ngIf="info" class="detail-content">
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">işletme adı</h3>
+            <p class="field-value text-color">bil wash laundry</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">yetkili isim soyisim</h3>
+            <p class="field-value text-color">Efe Çobanoğlu</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">cep telefonu</h3>
+            <p class="field-value text-color">535 867 18 97</p>
+          </ion-label>
+          <ion-label>
+            <h3 class="field-name">sabit telefon</h3>
+            <p class="field-value text-color">312 290 41 19</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">eposta adresi</h3>
+            <p class="field-value text-color">info@bil-wash.com</p>
+          </ion-label>
+          <ion-label>
+            <h3 class="field-name">web sitesi</h3>
+            <p class="field-value text-color">www.bil-wash.com</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">iş yeri adresi</h3>
+            <p class="field-value text-color">
+              Üniversiteler mah. Bilkent Ünv. 69. Yurt <br />
+              Çankaya Ankara
+            </p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+  </ion-item>
+
+  <div *ngIf="info" class="info-text text-color">
+    <ion-label
+      >bilgilerde değişiklik yapmak için lütfen müşteri hizmetleri <br />
+      ile iletişime geçiniz.</ion-label
+    >
+  </div>
+
+  <!--FATURA BİLGİLERİ -->
+  <ion-item
+    button
+    detail="false"
+    lines="none"
+    (click)="showBillInfo()"
+    class="expendable-item"
+  >
+    <div style="width: 100%">
+      <div class="card-title-container">
+        <ion-label class="label title-color bold-text"
+          >fatura bilgileri</ion-label
+        >
+        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+      </div>
+      <div *ngIf="billInfo" class="detail-content">
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">vergi no / tckn</h3>
+            <p class="field-value text-color">90148273645</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">fatura başlığı</h3>
+            <p class="field-value text-color">
+              Bil Wash Laundry Çamaşır Yıkama Hiz. Ltd. Şti.
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">fatura adresi</h3>
+            <p class="field-value text-color">
+              Üniversiteler mah. Bilkent Ünv. 69. Yurt <br />
+              Çankaya Ankara
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">iban</h3>
+            <p class="field-value text-color">TR 98 0000 0006 4006 5897 24</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+  </ion-item>
+
+  <!--KULLANICI İŞLEMLERİ -->
+
+  <ion-item
+    button
+    detail="false"
+    lines="none"
+    (click)="showUserInfo()"
+    class="expendable-item"
+  >
+    <div style="width: 100%">
+      <div class="card-title-container">
+        <ion-label class="label title-color bold-text"
+          >kullanıcı bilgileri</ion-label
+        >
+        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+      </div>
+      <div *ngIf="userInfo" class="detail-content">
+        <ion-item lines="none">
+          <ion-label>
+            <h3 class="field-name">yönetici</h3>
+            <p class="field-value text-color">Efe Çobanoğlu</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+  </ion-item>
+</ion-content>

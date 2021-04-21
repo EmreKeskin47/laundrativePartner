@@ -1,3 +1,16 @@
+.header-toolbar {
+  padding: 0.5rem 0 0rem 0;
+}
+.header-title {
+  text-align: left;
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  font-weight: bold;
+}
+.header-subtitle {
+  padding-top: 1rem;
+  padding-left: 5rem;
+}
 .root {
   height: 100%;
   display: flex;

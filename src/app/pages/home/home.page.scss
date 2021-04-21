@@ -1,21 +1,13 @@
-.header {
-  padding-top: 20vh;
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 0;
+.header-toolbar {
+  padding: 0.5rem 0 0rem 0;
 }
-
-.subtitle {
-  text-align: center;
-  font-size: 2.3rem;
-  text-indent: 6rem;
-  margin: 0;
-}
-
-.bold {
+.header-title {
+  text-align: left;
+  font-size: 1.5rem;
+  padding-left: 1rem;
   font-weight: bold;
 }
-
-.margin {
-  margin: 0;
+.header-subtitle {
+  padding-top: 1rem;
+  padding-left: 5rem;
 }

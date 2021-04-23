@@ -21,7 +21,12 @@
         <ion-label class="label title-color bold-text"
           >işletme bilgileri</ion-label
         >
-        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+        <div *ngIf="!info">
+          <ion-icon class="text-color" name="chevron-down-sharp"></ion-icon>
+        </div>
+        <div *ngIf="info">
+          <ion-icon class="text-color" name="chevron-up-sharp"></ion-icon>
+        </div>
       </ion-item>
       <div *ngIf="info" class="detail-content">
         <ion-item lines="none">
@@ -89,7 +94,12 @@
         <ion-label class="label title-color bold-text"
           >fatura bilgileri</ion-label
         >
-        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+        <div *ngIf="!billInfo">
+          <ion-icon class="text-color" name="chevron-down-sharp"></ion-icon>
+        </div>
+        <div *ngIf="billInfo">
+          <ion-icon class="text-color" name="chevron-up-sharp"></ion-icon>
+        </div>
       </ion-item>
       <div *ngIf="billInfo" class="detail-content">
         <ion-item lines="none">
@@ -138,111 +148,154 @@
         <ion-label class="label title-color bold-text"
           >kullanıcı bilgileri</ion-label
         >
-        <ion-icon class="text-color" name="chevron-forward-sharp"></ion-icon>
+        <div *ngIf="!userInfo">
+          <ion-icon class="text-color" name="chevron-down-sharp"></ion-icon>
+        </div>
+        <div *ngIf="userInfo">
+          <ion-icon class="text-color" name="chevron-up-sharp"></ion-icon>
+        </div>
       </ion-item>
       <div *ngIf="userInfo" class="detail-content">
-        <ion-item lines="none">
-          <ion-label>
-            <h3 class="field-name">yönetici</h3>
-            <p class="field-value text-color">Efe Çobanoğlu</p>
-          </ion-label>
-        </ion-item>
-        <!--ÇALIŞAN LİSTESİ -->
-        <div *ngFor="let item of employeeList; let i = index">
+        <div *ngIf="!addEmploye else addEmp">
           <ion-item lines="none">
             <ion-label>
-              <h3 class="field-name">calışan {{i + 1}}</h3>
-              <p class="field-value text-color">{{item.isim}}</p>
+              <h3 class="field-name">yönetici</h3>
+              <p class="field-value text-color">Efe Çobanoğlu</p>
             </ion-label>
-            <div *ngIf="edit">
-              <ion-button> sil</ion-button>
-            </div>
           </ion-item>
+          <!--ÇALIŞAN LİSTESİ -->
+          <div *ngFor="let item of employeeList; let i = index">
+            <ion-item lines="none">
+              <ion-label>
+                <h3 class="field-name">calışan {{i + 1}}</h3>
+                <p class="field-value text-color">{{item.isim}}</p>
+              </ion-label>
+              <div *ngIf="edit">
+                <ion-button> sil</ion-button>
+              </div>
+            </ion-item>
+          </div>
+
+          <ion-button expand="block" (click)="editEmployeeList()"
+            >düzenle</ion-button
+          >
+
+          <div *ngIf="edit else noEdit">
+            <ion-button
+              expand="block"
+              fill="outline"
+              class="title-color"
+              (click)="cancelEditEmpList()"
+              >vazgeç</ion-button
+            >
+          </div>
+          <ng-template #noEdit>
+            <ion-button
+              expand="block"
+              fill="outline"
+              class="title-color"
+              (click)="AddEmployee()"
+              >yeni çalışan ekle</ion-button
+            >
+          </ng-template>
         </div>
+        <!--ÇALIŞAN EKLEME FORMU  -->
+        <ng-template #addEmp>
+          <form
+            [formGroup]="validations_form"
+            (ngSubmit)="onSubmit(validations_form.value)"
+            class="form-bg"
+          >
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">çalışan isim soyisim</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="name"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.name"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
 
-        <ion-button expand="block" (click)="editEmployeeList()"
-          >düzenle</ion-button
-        >
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">eposta adresi</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="email"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.email"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
 
-        <ion-button
-          expand="block"
-          fill="outline"
-          class="title-color"
-          (click)="AddEmployee()"
-          >yeni çalışan ekle</ion-button
-        >
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">cep telefonu</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="phone"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.phone"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="validations_form.get('phone').hasError(validation.type) && (validations_form.get('phone').dirty || validations_form.get('phone').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-button expand="block">yeni calisan ekle </ion-button>
+
+                <ion-button
+                  expand="block"
+                  fill="outline"
+                  class="title-color"
+                  (click)="cancelEditEmpList()"
+                  >vazgeç</ion-button
+                >
+              </div>
+            </ion-item>
+          </form>
+        </ng-template>
       </div>
     </div>
   </ion-item>
-
-  <!--ÇALIŞAN EKLEME FORMU  -->
-  <div>
-    <form
-      [formGroup]="validations_form"
-      (ngSubmit)="onSubmit(validations_form.value)"
-    >
-      <ion-item lines="none" color="medium">
-        <ion-label>
-          <h3 class="field-name">çalışan isim soyisim</h3>
-          <ion-input
-            class="input text-color"
-            type="text"
-            formControlName="name"
-          ></ion-input>
-        </ion-label>
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.name">
-            <div
-              class="error-message"
-              *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-      </ion-item>
-
-      <ion-item lines="none" color="medium">
-        <ion-label>
-          <h3 class="field-name">eposta adresi</h3>
-          <ion-input
-            class="input text-color"
-            type="text"
-            formControlName="email"
-          ></ion-input>
-        </ion-label>
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.email">
-            <div
-              class="error-message"
-              *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-      </ion-item>
-
-      <ion-item lines="none" color="medium">
-        <ion-label>
-          <h3 class="field-name">cep telefonu</h3>
-          <ion-input
-            class="input text-color"
-            type="text"
-            formControlName="phone"
-          ></ion-input>
-        </ion-label>
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.phone">
-            <div
-              class="error-message"
-              *ngIf="validations_form.get('phone').hasError(validation.type) && (validations_form.get('phone').dirty || validations_form.get('phone').touched)"
-            >
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-      </ion-item>
-    </form>
-  </div>
 </ion-content>

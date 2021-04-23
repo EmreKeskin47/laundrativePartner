@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Calisan } from './../../models/calisan';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -71,6 +70,10 @@ export class ProfilePage implements OnInit {
 
   onSubmit(values) {
     console.log(values);
+  }
+
+  cancelEditEmpList() {
+    this.addEmploye = false;
   }
 
   //Error messages

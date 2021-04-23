@@ -27,6 +27,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/profile/profile.module').then((m) => m.ProfilePageModule),
   },
+  {
+    path: 'order-list',
+    loadChildren: () =>
+      import('./pages/order-list/order-list.module').then(
+        (m) => m.OrderListPageModule
+      ),
+  },
+  {
+    path: 'queue',
+    loadChildren: () =>
+      import('./pages/queue/queue.module').then((m) => m.QueuePageModule),
+  },
 ];
 
 @NgModule({

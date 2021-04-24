@@ -24,7 +24,9 @@ export class HomePage implements OnInit {
   navigateToProfile() {
     this.router.navigate(['/profile']);
   }
-  navigateToNewOrder() {}
+  navigateToNewOrder() {
+    this.router.navigate(['/order-details']);
+  }
   navigateToQueue() {
     this.router.navigate(['/queue']);
   }

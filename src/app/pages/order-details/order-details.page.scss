@@ -1,0 +1,99 @@
+.root {
+  padding-top: 0.5rem;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  --border-radius: 10px;
+  --padding-start: 1rem;
+  --inner-padding-end: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.card-title-container {
+  justify-content: space-between;
+  display: flex;
+  flex: 1;
+}
+
+.text-color {
+  color: #5e5e5e;
+}
+
+.pink-text {
+  color: #ff2f92;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.label {
+  font-size: 0.8rem;
+  padding-top: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.order-code {
+  text-align: right;
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+.order-item {
+  font-size: 0.5rem;
+}
+
+.cost-container {
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+}
+
+.rounded {
+  border-top: 1px solid #bbb;
+  border-radius: 1px;
+  width: 80%;
+}
+
+.inner-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-address-container {
+  height: 100%;
+  padding-top: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.date-address-text {
+  text-align: right;
+  font-size: 0.6rem;
+}
+
+.pic-info {
+  padding-left: 1rem;
+  font-size: 0.8rem;
+}
+
+.button-container {
+  padding: 2rem 0.5rem 1rem 0.5rem;
+}
+
+.warning-icon {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.warning-text {
+  font-size: 0.8rem;
+  padding-left: 1rem;
+}

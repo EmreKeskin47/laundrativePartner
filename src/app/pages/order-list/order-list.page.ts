@@ -15,6 +15,6 @@ export class OrderListPage implements OnInit {
   }
 
   navigateToOrderDetails() {
-    this.router.navigate(['/details']);
+    this.router.navigate(['/order-details']);
   }
 }

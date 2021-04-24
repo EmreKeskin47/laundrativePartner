@@ -1,0 +1,165 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>sipariş detayları</ion-title>
+    <ion-button slot="end" fill="clear" (click)="navigateToProfile()">
+      <ion-icon name="person"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="medium">
+  <div class="root">
+    <div>
+      <ion-item lines="none" class="card-title-container item">
+        <div style="width: 100%">
+          <ion-label class="label text-color bold-text"
+            >Revşan Deniz Yıldırım Çobanoğlu</ion-label
+          >
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" class="order-item"> 1 makina </ion-col>
+              <ion-col size="5" class="order-item">
+                çamaşır yıkama std
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4" class="order-item"> 10 gömlek </ion-col>
+              <ion-col size="5" class="order-item"> ütü std </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <div style="height: 100%">
+          <ion-label class="text-color order-code">A1897</ion-label>
+        </div>
+      </ion-item>
+
+      <!-- ÖDEME BİLGİSİ -->
+      <ion-item lines="none" class="card-title-container cost-container">
+        <div class="inner-container">
+          <ion-label class="label pink-text bold-text">ödeme bilgisi</ion-label>
+
+          <div style="width: 65%; padding-top: 1rem">
+            <ion-grid style="text-align: right">
+              <ion-row>
+                <ion-col size="7" class="order-item">
+                  1 makine çamaşır yıkama std
+                </ion-col>
+                <ion-col size="3" class="order-item"> 20,00 tl </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7" class="order-item">
+                  10 gömlek ütü std
+                </ion-col>
+                <ion-col size="3" class="order-item"> 40,00 tl </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7" class="order-item"> servis ücreti </ion-col>
+                <ion-col size="3" class="order-item"> 10,00 tl </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7" class="order-item">
+                  cyberpark indirimi (%5)
+                </ion-col>
+                <ion-col size="3" class="order-item"> - 6,00 tl </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="7" class="order-item"> kdv (%8) </ion-col>
+                <ion-col size="3" class="order-item"> 5,60 tl </ion-col>
+              </ion-row>
+              <hr class="rounded" />
+
+              <ion-row>
+                <ion-col size="7" class="bold-text order-item">
+                  toplam tutar
+                </ion-col>
+                <ion-col size="3" class="bold-text order-item">
+                  69,60 tl
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-item>
+
+      <!-- TESLİM ETME TARİHİ  -->
+      <ion-item lines="none" class="card-title-container cost-container">
+        <div class="inner-container">
+          <ion-label class="label pink-text bold-text"
+            >teslim etme tarihi</ion-label
+          >
+          <div class="date-address-container">
+            <ion-label class="text-color date-address-text"
+              >09.04.2021 Pazartesi
+            </ion-label>
+            <ion-label class="text-color date-address-text">15:30 </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <!-- TESLİM ETME ADRESİ  -->
+      <ion-item lines="none" class="card-title-container cost-container">
+        <div class="inner-container">
+          <ion-label class="label pink-text bold-text"
+            >teslim etme adresi</ion-label
+          >
+          <div class="date-address-container">
+            <ion-label class="text-color date-address-text"
+              >2518. Sok Kermes Sitesi 3. Blok No 56
+            </ion-label>
+            <ion-label class="text-color date-address-text"
+              >Ümit Mah. Çankaya Ankara
+            </ion-label>
+          </div>
+        </div>
+      </ion-item>
+
+      <!--RESIM EKLE
+  <ion-item
+    button
+    detail="false"
+    lines="none"
+    style="
+      width: 30%;
+      --inner-padding-end: 0;
+      --inner-padding-start: 0;
+      margin: 0;
+    "
+  >
+    <div>
+      <ion-icon
+        class="text-color"
+        style="text-align: center; font-size: 2rem; padding-left: 1rem"
+        name="camera"
+      ></ion-icon>
+      <ion-label
+        class="text-color"
+        style="text-align: center; font-size: 0.8rem"
+        >resim ekle
+      </ion-label>
+    </div>
+  </ion-item>
+
+    <ion-label class="pic-info text-color"
+    >teslim edilecek ürünler için resim ekleyebilirsiniz</ion-label
+  >
+   -->
+
+      <div class="button-container">
+        <ion-button expand="block"> teslim et</ion-button>
+      </div>
+    </div>
+
+    <div>
+      <ion-item color="medium" lines="none" button detail="false">
+        <ion-icon class="text-color warning-icon" name="warning"></ion-icon>
+        <ion-label class="text-color warning-text"
+          >sipariş hakkında sorun bildir
+        </ion-label>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>

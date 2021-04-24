@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/queue/queue.module').then((m) => m.QueuePageModule),
   },
+  {
+    path: 'order-details',
+    loadChildren: () => import('./pages/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
+  },
 ];
 
 @NgModule({

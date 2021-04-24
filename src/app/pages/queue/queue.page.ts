@@ -13,4 +13,8 @@ export class QueuePage implements OnInit {
   navigateToProfile() {
     this.router.navigate(['/profile']);
   }
+
+  navigateToOrderDetails() {
+    this.router.navigate(['/details']);
+  }
 }

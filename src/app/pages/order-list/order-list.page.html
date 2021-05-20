@@ -12,125 +12,44 @@
 
 <ion-content color="medium">
   <div style="padding-top: 1rem">
-    <ion-text>
-      <h3 class="text-color date">09.04.2021 Cuma</h3>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text"
-            >Revşan Deniz Yıldırım Çobanoğlu</ion-label
+    <div *ngFor="let order of orderList; index as i ">
+      <ion-text
+        *ngIf="i == 0 || orderList[i].siparisTarihi.substring(0,9) != orderList[i-1].siparisTarihi.substring(0,9) "
+      >
+        <h3 class="text-color date">
+          {{order.siparisTarihi | date: "d.M.yyyy EEEE"}}
+        </h3>
+      </ion-text>
+      <ion-item lines="none" class="item">
+        <div style="width: 100%">
+          <ion-item
+            button
+            lines="none"
+            detail="false"
+            class="card-title-container"
+            (click)="navigateToOrderDetails(order.siparisId)"
           >
-          <div>
-            <ion-label class="text-color order-code">A1897</ion-label>
-            <ion-label class="text-color order-cost">178,50 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text"
-            >Efe Çobanoğlu</ion-label
-          >
-          <div>
-            <ion-label class="text-color order-code">A1898</ion-label>
-            <ion-label class="text-color order-cost">95,99 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text">Emre Keskin</ion-label>
-          <div>
-            <ion-label class="text-color order-code">A1899</ion-label>
-            <ion-label class="text-color order-cost">24,00 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-    <!-- Second date -->
-    <ion-text>
-      <h3 class="text-color date">08.04.2021 Perşembe</h3>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text">Levent Güren</ion-label>
-          <div>
-            <ion-label class="text-color order-code">A1900</ion-label>
-            <ion-label class="text-color order-cost">78,50 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text"
-            >Mehmet Ali Ehliz</ion-label
-          >
-          <div>
-            <ion-label class="text-color order-code">A1901</ion-label>
-            <ion-label class="text-color order-cost">295,00 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-
-    <!-- Third date -->
-    <ion-text>
-      <h3 class="text-color date">07.04.2021 Çarşamba</h3>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <ion-label class="label text-color bold-text">Ufuk Şentürk</ion-label>
-          <div>
-            <ion-label class="text-color order-code">A1902</ion-label>
-            <ion-label class="text-color order-cost">95,99 tl</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
+            <ion-label class="label text-color bold-text"
+              >{{order.musteriAdi}}</ion-label
+            >
+            <div>
+              <ion-label class="text-color order-code"
+                >{{order.siparisId}}</ion-label
+              >
+              <div *ngIf="order.fiyat.toString().includes('.'); else elseBlock">
+                <ion-label class="text-color order-cost"
+                  >{{order.fiyat}} tl</ion-label
+                >
+              </div>
+              <ng-template #elseBlock
+                ><ion-label class="text-color order-cost"
+                  >{{order.fiyat}}.00 tl</ion-label
+                >
+              </ng-template>
+            </div>
+          </ion-item>
+        </div>
+      </ion-item>
+    </div>
   </div>
 </ion-content>

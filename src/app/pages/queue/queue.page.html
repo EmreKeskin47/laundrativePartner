@@ -11,83 +11,61 @@
 </ion-header>
 
 <ion-content color="medium">
-  <div style="padding-top: 1rem">
-    <ion-text>
-      <div class="date-time">
-        <h3 class="text-color time">16:30</h3>
-        <h3 class="text-color date">09.04.2021 Cuma</h3>
-      </div>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <div style="width: 100%">
-            <ion-label class="label text-color bold-text"
-              >Revşan Deniz Yıldırım Çobanoğlu</ion-label
-            >
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4" class="order-item"> 1 makina </ion-col>
-                <ion-col size="5" class="order-item">
-                  çamaşır yıkama std
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="4" class="order-item"> 10 gömlek </ion-col>
-                <ion-col size="5" class="order-item"> ütü std </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
+  <div *ngIf="islemSirasi != []">
+    <div *ngFor="let item of islemSirasi; index as i">
+      <ion-text>
+        <div class="date-time">
+          <h3 class="text-color time">{{item.tarih | date: "HH:mm" }}</h3>
+          <h3 class="text-color date">
+            {{item.tarih | date: "dd.MM.yyyy EEEE" }}
+          </h3>
+        </div>
+      </ion-text>
 
-          <div>
-            <ion-label class="text-color order-code">A1897</ion-label>
-            <ion-label class="text-color order-cost">teslim edilecek</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
+      <ion-item lines="none" class="item">
+        <div style="width: 100%">
+          <ion-item
+            button
+            lines="none"
+            detail="false"
+            class="card-title-container"
+            (click)="navigateToOrderDetails(item.siparisNo)"
+          >
+            <div style="width: 100%">
+              <div>
+                <ion-label class="label text-color bold-text"
+                  >{{item.musteriAdi}}</ion-label
+                >
+              </div>
 
-    <ion-text>
-      <div class="date-time">
-        <h3 class="text-color time">16:45</h3>
-      </div>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <div style="width: 100%">
-            <ion-label class="label text-color bold-text"
-              >Efe Çobanoğlu</ion-label
-            >
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4" class="order-item"> 1 makina </ion-col>
-                <ion-col size="5" class="order-item">
-                  çamaşır yıkama std
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
+              <ion-grid>
+                <div *ngFor="let kategori of getKategoriler(i) ">
+                  <ion-row
+                    *ngFor="let urun of getIslemSirasiDetaylar(i,kategori)"
+                  >
+                    <ion-col size="6" class="order-item">
+                      {{urun.cinsAdi}}
+                    </ion-col>
+                    <ion-col size="5" class="order-item">
+                      {{kategoriAdi[kategori]}} {{tipAdlari[urun.tip]}}
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-grid>
+            </div>
 
-          <div>
-            <ion-label class="text-color order-code">A1898</ion-label>
-            <ion-label class="text-color order-cost">mağaza teslim</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
+            <div class="siparisNo-container">
+              <ion-label class="text-color order-code"
+                >{{item.siparisNo}}</ion-label
+              >
+              <ion-label class="text-color order-cost"
+                >{{durum[item.status]}}</ion-label
+              >
+            </div>
+          </ion-item>
+        </div>
+      </ion-item>
+    </div>
 
     <ion-text>
       <div class="date-time">
@@ -101,7 +79,6 @@
           lines="none"
           detail="false"
           class="card-title-container"
-          (click)="navigateToOrderDetails()"
         >
           <div style="width: 100%">
             <ion-label class="label text-color bold-text"
@@ -128,7 +105,6 @@
           lines="none"
           detail="false"
           class="card-title-container"
-          (click)="navigateToOrderDetails()"
         >
           <div style="width: 100%">
             <ion-label class="label text-color bold-text"
@@ -141,80 +117,7 @@
 
           <div>
             <ion-label class="text-color order-code">A1900</ion-label>
-            <ion-label class="order-cost pink-text">teslim alınıcak</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-
-    <ion-text>
-      <div class="date-time">
-        <h3 class="text-color time">17:25</h3>
-      </div>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <div style="width: 100%">
-            <ion-label class="label text-color bold-text"
-              >Mehmet Ali Ehliz</ion-label
-            >
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4" class="order-item"> 1 takım elbise </ion-col>
-                <ion-col size="5" class="order-item">
-                  kuru temizleme std
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
-
-          <div>
-            <ion-label class="text-color order-code">A1901</ion-label>
-            <ion-label class="text-color order-cost">teslim edilecek</ion-label>
-          </div>
-        </ion-item>
-      </div>
-    </ion-item>
-
-    <ion-text>
-      <div class="date-time">
-        <h3 class="text-color time">09:00</h3>
-        <h3 class="text-color date">10.04.2021 Cumartesi</h3>
-      </div>
-    </ion-text>
-    <ion-item lines="none" class="item">
-      <div style="width: 100%">
-        <ion-item
-          button
-          lines="none"
-          detail="false"
-          class="card-title-container"
-          (click)="navigateToOrderDetails()"
-        >
-          <div style="width: 100%">
-            <ion-label class="label text-color bold-text"
-              >Ufuk Şentürk</ion-label
-            >
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4" class="order-item"> 1 makina </ion-col>
-                <ion-col size="5" class="order-item">
-                  çamaşır yıkama std
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
-
-          <div>
-            <ion-label class="text-color order-code">A1902</ion-label>
-            <ion-label class="text-color order-cost">teslim edilecek</ion-label>
+            <ion-label class="order-cost pink-text">teslim alınacak</ion-label>
           </div>
         </ion-item>
       </div>

@@ -1,3 +1,5 @@
+import { SiparisListe } from './../../models/SiparisListe';
+import { SiparisService } from './../../services/siparis.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,14 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-list.page.scss'],
 })
 export class OrderListPage implements OnInit {
-  constructor(private router: Router) {}
+  orderList: SiparisListe[] = [];
 
-  ngOnInit() {}
+  constructor(private router: Router, private siparisService: SiparisService) {}
+
+  ngOnInit() {
+    this.siparisService.getListe().subscribe((res: any[]) => {
+      this.orderList = res;
+    });
+  }
   navigateToProfile() {
     this.router.navigate(['/profile']);
   }
 
-  navigateToOrderDetails() {
-    this.router.navigate(['/order-details']);
+  navigateToOrderDetails(id: number) {
+    this.router.navigate(['/order-details', { siparisId: id }]);
   }
 }

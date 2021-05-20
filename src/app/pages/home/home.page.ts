@@ -1,5 +1,6 @@
+import { ProfilService } from './../../services/profil.service';
+import { SiparisService } from './../../services/siparis.service';
 import { Router } from '@angular/router';
-import { Kurum } from './../../models/kurum';
 import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
@@ -7,25 +8,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  institutionInfo: Kurum;
+  kurumAdi = '';
+  yoneticiAdi = '';
+  yeniSiparis = 0;
+  islemSirasi = 0;
+  siparisListesi = 0;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private siparisService: SiparisService,
+    private profilService: ProfilService
+  ) {}
 
   ngOnInit() {
-    this.institutionInfo = new Kurum(
-      'bil wash laundry',
-      'Efe Çobanoğlu',
-      1,
-      5,
-      10
-    );
+    this.kurumAdi = this.profilService.isletme_adi;
+    this.yoneticiAdi = this.profilService.yonetici_adi;
+    this.siparisService.siparisOzet().subscribe((res) => {
+      if (res) {
+        this.yeniSiparis = res.yeniSiparis;
+        this.islemSirasi = res.islemdekiSiparisSayisi;
+        this.siparisListesi = res.tumSiparisSayisi;
+      }
+    });
   }
 
   navigateToProfile() {
     this.router.navigate(['/profile']);
   }
   navigateToNewOrder() {
-    this.router.navigate(['/order-details']);
+    this.router.navigate(['/queue']);
   }
   navigateToQueue() {
     this.router.navigate(['/queue']);
@@ -33,4 +44,6 @@ export class HomePage implements OnInit {
   navigateToOrderList() {
     this.router.navigate(['/order-list']);
   }
+
+  ionViewDidEnter() {}
 }

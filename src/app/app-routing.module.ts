@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -41,7 +41,10 @@ const routes: Routes = [
   },
   {
     path: 'order-details',
-    loadChildren: () => import('./pages/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
+    loadChildren: () =>
+      import('./pages/order-details/order-details.module').then(
+        (m) => m.OrderDetailsPageModule
+      ),
   },
 ];
 

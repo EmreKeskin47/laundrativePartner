@@ -12,12 +12,8 @@
   <ion-item color="medium" lines="none" class="store-container">
     <ion-icon class="gray store-icon" name="nuclear-outline"></ion-icon>
     <div style="padding-top: 1.5rem">
-      <ion-label class="gray store-name"
-        >{{institutionInfo.kurum_adi}}</ion-label
-      >
-      <ion-label class="gray store-manager"
-        >{{institutionInfo.yonetici_adi}}</ion-label
-      >
+      <ion-label class="gray store-name">{{kurumAdi}}</ion-label>
+      <ion-label class="gray store-manager">{{yoneticiAdi}}</ion-label>
     </div>
   </ion-item>
 
@@ -33,9 +29,7 @@
           (click)="navigateToNewOrder()"
         >
           <div style="flex: 1">
-            <ion-label class="number">
-              {{institutionInfo.yeniSiparis}}
-            </ion-label>
+            <ion-label class="number"> {{yeniSiparis}} </ion-label>
             <ion-label class="option"> yeni siparis</ion-label>
           </div>
         </ion-item>
@@ -50,9 +44,7 @@
           (click)="navigateToQueue()"
         >
           <div style="flex: 1">
-            <ion-label class="number">
-              {{institutionInfo.islemSirasi}}
-            </ion-label>
+            <ion-label class="number"> {{islemSirasi}} </ion-label>
             <ion-label class="option"> işlem sırası</ion-label>
           </div>
         </ion-item>
@@ -67,9 +59,7 @@
           (click)="navigateToOrderList()"
         >
           <div style="flex: 1">
-            <ion-label class="number">
-              {{institutionInfo.siparisListesi}}
-            </ion-label>
+            <ion-label class="number"> {{siparisListesi}} </ion-label>
             <ion-label class="option"> siparis listesi</ion-label>
           </div>
         </ion-item>

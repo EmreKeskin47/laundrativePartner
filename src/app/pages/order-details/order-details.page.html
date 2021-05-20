@@ -11,29 +11,29 @@
 </ion-header>
 
 <ion-content color="medium">
-  <div class="root">
+  <div class="root" *ngIf="siparis">
     <div>
       <ion-item lines="none" class="card-title-container item">
         <div style="width: 100%">
           <ion-label class="label text-color bold-text"
-            >Revşan Deniz Yıldırım Çobanoğlu</ion-label
+            >{{siparis.musteriAdi}}</ion-label
           >
           <ion-grid>
-            <ion-row>
-              <ion-col size="4" class="order-item"> 1 makina </ion-col>
-              <ion-col size="5" class="order-item">
-                çamaşır yıkama std
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="4" class="order-item"> 10 gömlek </ion-col>
-              <ion-col size="5" class="order-item"> ütü std </ion-col>
-            </ion-row>
+            <div *ngFor="let item of siparis.detay">
+              <ion-row>
+                <ion-col size="6" class="order-item">
+                  {{item.cinsAdi}}
+                </ion-col>
+                <ion-col size="5" class="order-item">
+                  {{kategoriAdi[item.kategori]}} {{tipAdlari[item.tip]}}
+                </ion-col>
+              </ion-row>
+            </div>
           </ion-grid>
         </div>
 
         <div style="height: 100%">
-          <ion-label class="text-color order-code">A1897</ion-label>
+          <ion-label class="text-color order-code">{{siparisId}}</ion-label>
         </div>
       </ion-item>
 
@@ -44,41 +44,53 @@
 
           <div style="width: 65%; padding-top: 1rem">
             <ion-grid style="text-align: right">
+              <div *ngFor="let item of siparis.detay">
+                <ion-row>
+                  <ion-col size="8" class="order-item">
+                    {{item.adet}} {{item.cinsAdi}} {{tipAdlari[item.tip]}}
+                  </ion-col>
+                  <ion-col size="3" class="order-item">
+                    {{item.fiyat}},00 tl
+                  </ion-col>
+                </ion-row>
+              </div>
               <ion-row>
-                <ion-col size="7" class="order-item">
-                  1 makine çamaşır yıkama std
+                <ion-col size="8" class="order-item"> servis ücreti </ion-col>
+                <ion-col size="3" class="order-item">
+                  {{siparis.servisTutari}}
                 </ion-col>
-                <ion-col size="3" class="order-item"> 20,00 tl </ion-col>
               </ion-row>
-              <ion-row>
-                <ion-col size="7" class="order-item">
-                  10 gömlek ütü std
+              <ion-row *ngIf="siparis.indirimOrani>0">
+                <ion-col size="8" class="order-item">
+                  {{indirimAdi[siparis.indirimTipi]}}
                 </ion-col>
-                <ion-col size="3" class="order-item"> 40,00 tl </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="7" class="order-item"> servis ücreti </ion-col>
-                <ion-col size="3" class="order-item"> 10,00 tl </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col size="7" class="order-item">
-                  cyberpark indirimi (%5)
+                <ion-col size="3" class="order-item">
+                  {{siparis.indirimOrani}}
                 </ion-col>
-                <ion-col size="3" class="order-item"> - 6,00 tl </ion-col>
               </ion-row>
               <ion-row>
-                <ion-col size="7" class="order-item"> kdv (%8) </ion-col>
-                <ion-col size="3" class="order-item"> 5,60 tl </ion-col>
+                <ion-col size="8" class="order-item"> kdv (%8) </ion-col>
+                <ion-col size="3" class="order-item"> {{siparis.kdv}} </ion-col>
               </ion-row>
               <hr class="rounded" />
 
               <ion-row>
-                <ion-col size="7" class="bold-text order-item">
+                <ion-col size="8" class="bold-text order-item">
                   toplam tutar
                 </ion-col>
-                <ion-col size="3" class="bold-text order-item">
-                  69,60 tl
+
+                <ion-col
+                  *ngIf="siparis.fiyat.toString().includes('.'); else elseBlock"
+                  size="3"
+                  class="bold-text order-item"
+                >
+                  {{siparis.fiyat}} tl
                 </ion-col>
+                <ng-template #elseBlock>
+                  <ion-col size="3" class="bold-text order-item">
+                    {{siparis.fiyat}}.00 tl
+                  </ion-col>
+                </ng-template>
               </ion-row>
             </ion-grid>
           </div>
@@ -93,9 +105,11 @@
           >
           <div class="date-address-container">
             <ion-label class="text-color date-address-text"
-              >09.04.2021 Pazartesi
+              >{{siparis.teslimAlmaZamani | date: "dd.MM.yy EEEE ":'fr'}}
             </ion-label>
-            <ion-label class="text-color date-address-text">15:30 </ion-label>
+            <ion-label class="text-color date-address-text"
+              >{{siparis.teslimAlmaZamani | date: "HH:mm"}}
+            </ion-label>
           </div>
         </div>
       </ion-item>
@@ -108,45 +122,34 @@
           >
           <div class="date-address-container">
             <ion-label class="text-color date-address-text"
-              >2518. Sok Kermes Sitesi 3. Blok No 56
+              >{{siparis.teslimEtmeAdres}}
             </ion-label>
             <ion-label class="text-color date-address-text"
-              >Ümit Mah. Çankaya Ankara
+              >{{siparis.teslimEtmeAdres}}
             </ion-label>
           </div>
         </div>
       </ion-item>
 
-      <!--RESIM EKLE
-  <ion-item
-    button
-    detail="false"
-    lines="none"
-    style="
-      width: 30%;
-      --inner-padding-end: 0;
-      --inner-padding-start: 0;
-      margin: 0;
-    "
-  >
-    <div>
-      <ion-icon
-        class="text-color"
-        style="text-align: center; font-size: 2rem; padding-left: 1rem"
-        name="camera"
-      ></ion-icon>
-      <ion-label
-        class="text-color"
-        style="text-align: center; font-size: 0.8rem"
-        >resim ekle
-      </ion-label>
-    </div>
-  </ion-item>
+      <!--RESIM EKLE-->
+      <ion-item button detail="false" lines="none" class="image-container">
+        <div>
+          <ion-icon
+            class="text-color"
+            style="text-align: center; font-size: 2rem; padding-left: 1rem"
+            name="camera"
+          ></ion-icon>
+          <ion-label
+            class="text-color"
+            style="text-align: center; font-size: 0.8rem"
+            >resim ekle
+          </ion-label>
+        </div>
+      </ion-item>
 
-    <ion-label class="pic-info text-color"
-    >teslim edilecek ürünler için resim ekleyebilirsiniz</ion-label
-  >
-   -->
+      <ion-label class="pic-info text-color"
+        >teslim edilecek ürünler için resim ekleyebilirsiniz</ion-label
+      >
 
       <div class="button-container">
         <ion-button expand="block"> teslim et</ion-button>

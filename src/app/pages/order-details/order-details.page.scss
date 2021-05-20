@@ -69,7 +69,7 @@
 
 .date-address-container {
   height: 100%;
-  padding-top: 2rem;
+  padding-top: 1rem;
   padding-right: 1rem;
   padding-bottom: 0.5rem;
 }
@@ -82,6 +82,13 @@
 .pic-info {
   padding-left: 1rem;
   font-size: 0.8rem;
+}
+
+.image-container {
+  width: 30%;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  margin: 0;
 }
 
 .button-container {

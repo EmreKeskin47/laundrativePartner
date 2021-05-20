@@ -1,3 +1,4 @@
+import { ProfilService } from './../../services/profil.service';
 import { AuthService } from '../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     public formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private profileService: ProfilService
   ) {}
 
   ngOnInit() {
@@ -42,12 +44,16 @@ export class LoginPage implements OnInit {
   onSubmit(values) {
     this.authService.login(values.email, values.password).subscribe((res) => {
       if (res.token) {
-        console.log('success');
         this.authService.setCredentials(
           values.email,
           values.password,
           res.token
         );
+        this.profileService.setIsletmeBilgileri(
+          res.isletmeAdi,
+          res.yoneticiAdi
+        );
+        this.router.navigate(['/home']);
       } else {
         console.log('Login Failed');
       }

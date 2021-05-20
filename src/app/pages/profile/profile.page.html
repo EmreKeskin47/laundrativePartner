@@ -32,48 +32,52 @@
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">işletme adı</h3>
-            <p class="field-value text-color">bil wash laundry</p>
+            <p class="field-value text-color">{{kurumProfil.isletmeAdi}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">yetkili isim soyisim</h3>
-            <p class="field-value text-color">Efe Çobanoğlu</p>
+            <p class="field-value text-color">{{kurumProfil.yoneticiAdi}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">cep telefonu</h3>
-            <p class="field-value text-color">535 867 18 97</p>
+            <p class="field-value text-color">{{kurumProfil.cepTelefon}}</p>
           </ion-label>
           <ion-label>
             <h3 class="field-name">sabit telefon</h3>
-            <p class="field-value text-color">312 290 41 19</p>
+            <p class="field-value text-color">{{kurumProfil.kurumTelefon}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">eposta adresi</h3>
-            <p class="field-value text-color">info@bil-wash.com</p>
+            <p class="field-value text-color">{{kurumProfil.yoneticiEPosta}}</p>
           </ion-label>
           <ion-label>
             <h3 class="field-name">web sitesi</h3>
-            <p class="field-value text-color">www.bil-wash.com</p>
+            <p class="field-value text-color">{{kurumProfil.webSitesi}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">iş yeri adresi</h3>
-            <p class="field-value text-color">
-              Üniversiteler mah. Bilkent Ünv. 69. Yurt <br />
-              Çankaya Ankara
-            </p>
+            <p class="field-value text-color">{{kurumProfil.isyeriAdresi}}</p>
           </ion-label>
         </ion-item>
       </div>
     </div>
   </ion-item>
 
+  <!--
+
+    .ion-minus-circled:before {
+    content: "\f207";
+}
+
+  -->
   <div *ngIf="info" class="info-text text-color">
     <ion-label
       >bilgilerde değişiklik yapmak için lütfen müşteri hizmetleri <br />
@@ -105,30 +109,25 @@
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">vergi no / tckn</h3>
-            <p class="field-value text-color">90148273645</p>
+            <p class="field-value text-color">{{kurumProfil.vergiNo}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">fatura başlığı</h3>
-            <p class="field-value text-color">
-              Bil Wash Laundry Çamaşır Yıkama Hiz. Ltd. Şti.
-            </p>
+            <p class="field-value text-color">{{kurumProfil.faturaBasligi}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">fatura adresi</h3>
-            <p class="field-value text-color">
-              Üniversiteler mah. Bilkent Ünv. 69. Yurt <br />
-              Çankaya Ankara
-            </p>
+            <p class="field-value text-color">{{kurumProfil.faturaAdresi}}</p>
           </ion-label>
         </ion-item>
         <ion-item lines="none">
           <ion-label>
             <h3 class="field-name">iban</h3>
-            <p class="field-value text-color">TR 98 0000 0006 4006 5897 24</p>
+            <p class="field-value text-color">{{kurumProfil.iban}}</p>
           </ion-label>
         </ion-item>
       </div>
@@ -155,55 +154,71 @@
           <ion-icon class="text-color" name="chevron-up-sharp"></ion-icon>
         </div>
       </ion-item>
+
       <div *ngIf="userInfo" class="detail-content">
-        <div *ngIf="!addEmploye else addEmp">
-          <ion-item lines="none">
-            <ion-label>
-              <h3 class="field-name">yönetici</h3>
-              <p class="field-value text-color">Efe Çobanoğlu</p>
-            </ion-label>
-          </ion-item>
-          <!--ÇALIŞAN LİSTESİ -->
-          <div *ngFor="let item of employeeList; let i = index">
-            <ion-item lines="none">
-              <ion-label>
-                <h3 class="field-name">calışan {{i + 1}}</h3>
-                <p class="field-value text-color">{{item.isim}}</p>
-              </ion-label>
-              <div *ngIf="edit">
-                <ion-button> sil</ion-button>
-              </div>
-            </ion-item>
-          </div>
+        <div *ngIf="!addEmploye && kurumKullanicilar.length>0 else addEmp">
+          <div *ngIf="!editEmployeeSelected else editSelectedEmployeeComp">
+            <!--YÖNETİCİ -->
+            <div *ngFor="let item of kurumKullanicilar">
+              <ion-item *ngIf="item.rolId == 1" lines="none">
+                <ion-label>
+                  <h3 class="field-name">{{item.rolAdi}}</h3>
+                  <p class="field-value text-color">{{item.username}}</p>
+                </ion-label>
+              </ion-item>
+            </div>
+            <!--ÇALIŞAN LİSTESİ -->
+            <div *ngFor="let item of kurumKullanicilar; let i = index">
+              <ion-item *ngIf="item.rolId != 1" lines="none">
+                <ion-button
+                  *ngIf="edit"
+                  fill="clear"
+                  (click)="deleteEmployee(item.id)"
+                  class="delete-container"
+                >
+                  <ion-icon class="delete-icon" name="remove-circle"></ion-icon>
+                </ion-button>
+                <ion-label>
+                  <h3 class="field-name">{{item.rolAdi }}</h3>
+                  <p class="field-value text-color">{{item.username}}</p>
+                </ion-label>
+                <div *ngIf="edit">
+                  <ion-button (click)="setSelectedKullanici(item)">
+                    düzenle</ion-button
+                  >
+                </div>
+              </ion-item>
+            </div>
 
-          <ion-button expand="block" (click)="editEmployeeList()"
-            >düzenle</ion-button
-          >
+            <div *ngIf="!edit else editConfirm">
+              <ion-button expand="block" (click)="editEmployeeList()"
+                >düzenle</ion-button
+              >
+            </div>
 
-          <div *ngIf="edit else noEdit">
-            <ion-button
-              expand="block"
-              fill="outline"
-              class="title-color"
-              (click)="cancelEditEmpList()"
-              >vazgeç</ion-button
-            >
+            <ng-template #editConfirm>
+              <ion-button expand="block" (click)="editEmployeeList()"
+                >tamam</ion-button
+              >
+            </ng-template>
+
+            <div *ngIf="!edit">
+              <ion-button
+                expand="block"
+                fill="outline"
+                class="title-color"
+                (click)="AddEmployee()"
+                >yeni çalışan ekle</ion-button
+              >
+            </div>
           </div>
-          <ng-template #noEdit>
-            <ion-button
-              expand="block"
-              fill="outline"
-              class="title-color"
-              (click)="AddEmployee()"
-              >yeni çalışan ekle</ion-button
-            >
-          </ng-template>
         </div>
+
         <!--ÇALIŞAN EKLEME FORMU  -->
         <ng-template #addEmp>
           <form
             [formGroup]="validations_form"
-            (ngSubmit)="onSubmit(validations_form.value)"
+            (ngSubmit)="onSubmitCreate(validations_form.value)"
             class="form-bg"
           >
             <ion-item lines="none" color="medium" class="emp-form">
@@ -282,7 +297,11 @@
             </ion-item>
             <ion-item lines="none" color="medium" class="emp-form">
               <div style="width: 100%">
-                <ion-button expand="block">yeni calisan ekle </ion-button>
+                <ion-button
+                  expand="block"
+                  (click)="onSubmitCreate(validations_form.value)"
+                  >yeni calisan ekle
+                </ion-button>
 
                 <ion-button
                   expand="block"
@@ -294,6 +313,138 @@
               </div>
             </ion-item>
           </form>
+          <ion-item color="medium" lines="none" class="bottom-label">
+            <ion-label class="text-color">
+              belirttiğiniz eposta adresine üyelik bilgileri gönderilmiştir
+              <br />
+              aktivasyon linki sadece 15 dakika boyunca geçerlidir.
+            </ion-label>
+          </ion-item>
+        </ng-template>
+
+        <!--ÇALIŞAN DÜZENLEME FORMU  -->
+        <ng-template #editSelectedEmployeeComp>
+          <form
+            [formGroup]="update_form"
+            (ngSubmit)="onSubmitEdit(update_form.value)"
+            class="form-bg"
+          >
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">çalışan isim soyisim</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="name"
+                    [(ngModel)]="selectedKullanici.username"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.name"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="update_form.get('name').hasError(validation.type) && (update_form.get('name').dirty || update_form.get('name').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">eposta adresi</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="email"
+                    [(ngModel)]="selectedKullanici.email"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.email"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="update_form.get('email').hasError(validation.type) && (update_form.get('email').dirty || update_form.get('email').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
+
+            <ion-item
+              color="medium"
+              lines="none"
+              button
+              detail="false"
+              style="height: 2rem"
+            >
+              <ion-icon
+                class="text-color warning-icon"
+                name="warning"
+              ></ion-icon>
+              <ion-label class="text-color warning-text"
+                >yeniden aktivasyon linki göndermek için <b> tıklayın</b>
+              </ion-label>
+            </ion-item>
+
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-label style="max-width: 100%">
+                  <h3 class="field-name">cep telefonu</h3>
+                  <ion-input
+                    class="input text-color"
+                    type="text"
+                    formControlName="phone"
+                    [(ngModel)]="selectedKullanici.telefonCep"
+                  ></ion-input>
+                </ion-label>
+                <div class="validation-errors">
+                  <ng-container
+                    *ngFor="let validation of validation_messages.phone"
+                  >
+                    <div
+                      class="error-message"
+                      *ngIf="update_form.get('phone').hasError(validation.type) && (update_form.get('phone').dirty || update_form.get('phone').touched)"
+                    >
+                      {{ validation.message }}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </ion-item>
+            <ion-item lines="none" color="medium" class="emp-form">
+              <div style="width: 100%">
+                <ion-button
+                  expand="block"
+                  (click)="onSubmitEdit(update_form.value)"
+                  >bilgileri güncelle
+                </ion-button>
+
+                <ion-button
+                  expand="block"
+                  fill="outline"
+                  class="title-color"
+                  (click)="editEmployee()"
+                  >vazgeç</ion-button
+                >
+              </div>
+            </ion-item>
+          </form>
+          <ion-item color="medium" lines="none" class="bottom-label">
+            <ion-label class="text-color">
+              belirttiğiniz eposta adresine üyelik bilgileri gönderilmiştir
+            </ion-label>
+          </ion-item>
         </ng-template>
       </div>
     </div>

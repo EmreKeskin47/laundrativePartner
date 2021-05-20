@@ -1,4 +1,6 @@
-import { Calisan } from './../../models/calisan';
+import { Kullanici } from './../../models/Kullanici';
+import { KurumProfil } from './../../models/KurumProfil';
+import { ProfilService } from './../../services/profil.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -15,27 +17,24 @@ export class ProfilePage implements OnInit {
   info: boolean = false;
   billInfo: boolean = false;
   userInfo: boolean = false;
-  employeeList: Calisan[] = [];
+
   edit: boolean = false;
   addEmploye: boolean = false;
-  validations_form: FormGroup;
+  editEmployeeSelected: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  validations_form: FormGroup;
+  update_form: FormGroup;
+
+  kurumProfil: KurumProfil;
+  kurumKullanicilar: Kullanici[] = [];
+  selectedKullanici: Kullanici;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private profilService: ProfilService
+  ) {}
 
   ngOnInit() {
-    let temp1 = new Calisan(
-      'Mehmet Ali Ehliz',
-      'muhabbet4242@gmail.com',
-      '542 389 76 56'
-    );
-    let temp2 = new Calisan(
-      'Ufuk Şentürk',
-      'muhabbet4242@gmail.com',
-      '542 389 76 56'
-    );
-    this.employeeList.push(temp1);
-    this.employeeList.push(temp2);
-
     this.validations_form = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       email: new FormControl(
@@ -47,6 +46,24 @@ export class ProfilePage implements OnInit {
       ),
       phone: new FormControl('', Validators.required),
     });
+
+    this.update_form = this.formBuilder.group({
+      name: new FormControl('', Validators.required),
+      email: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ])
+      ),
+      phone: new FormControl('', Validators.required),
+    });
+
+    this.profilService
+      .getKullanicilar()
+      .subscribe((res) => (this.kurumKullanicilar = res));
+
+    this.profilService.getProfil().subscribe((res) => (this.kurumProfil = res));
   }
 
   showInfo() {
@@ -63,17 +80,45 @@ export class ProfilePage implements OnInit {
   editEmployeeList() {
     this.edit = !this.edit;
   }
+  cancelEditEmpList() {
+    this.addEmploye = false;
+  }
 
   AddEmployee() {
     this.addEmploye = true;
   }
 
-  onSubmit(values) {
-    console.log(values);
+  editEmployee() {
+    this.editEmployeeSelected = !this.editEmployeeSelected;
   }
 
-  cancelEditEmpList() {
-    this.addEmploye = false;
+  setSelectedKullanici(kullanici: Kullanici) {
+    this.editEmployee();
+    this.selectedKullanici = kullanici;
+  }
+  deleteEmployee(id: number) {
+    this.profilService
+      .deleteKullanici(id)
+      .subscribe((res) => console.log(res, 'delete res'));
+  }
+
+  onSubmitCreate(values) {
+    console.log(values);
+    this.profilService
+      .createKullanici(values.name, values.email, values.phone)
+      .subscribe((res) => console.log(res, 'create res'));
+  }
+
+  onSubmitEdit(values) {
+    this.profilService
+      .updateKullanici(
+        this.selectedKullanici.id,
+        values.name,
+        values.email,
+        values.phone
+      )
+      .subscribe((res) => console.log(res, 'update res'));
+    this.editEmployee();
   }
 
   //Error messages
